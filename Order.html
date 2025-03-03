@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Bill Payment</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href="./site.webmanifest">
+</head>
+<body>
+    <header>
+        <div class="ml">
+            <img src="images/logo.jpg" alt="logo" width="100">
+        </div>
+        <div class="mh">
+            <h1>LIFE CARE HOSPITALS</h1>
+            <p>Your Wellness Our Responsibility</p>
+        </div>
+        <div class="search-bar">
+            <div class="search">
+                <form action="">
+                    <input type="text" placeholder="Search">
+                    <button type="button">
+                        <img src="images/search.jpg" alt="search" width="30" height="15">
+                    </button>
+                </form>
+            </div>
+        </div>
+    </header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="About_us.html">About us</a>
+            <a href="Services.html">Services</a>
+            <a href="Doctors.html">Doctors</a>
+            <a href="Consulting_reservation.html">Consulting reservation</a>
+            <a href="Pharmacy.html">Pharmacy</a>
+        </nav>
+        <h3>Bill Pay</h3>
+    <main>
+        <section class="section4">
+            <h2>Your Order</h2>
+            <table id="order-table">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody id="order-items">
+                <!-- Filled dynamically from cart -->
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="3">Total</td>
+                  <td id="order-total">Rs. 0</td>
+                </tr>
+              </tfoot>
+            </table>
+          </section>
+      
+          <section id="order-form">
+              <h4>Secure Checkout</h4>
+              <p>Complete your purchase by filling out the details below.</p>
+              <form id="payment-form" onsubmit="return handlePayment(event)">
+                <!-- Personal Details -->
+                <fieldset>
+                  <legend>Personal Details</legend>
+                  <label for="full-name">Full Name:</label>
+                  <input type="text" id="full-name" name="full-name" required placeholder="John Doe">
+                  <br>
+                  <label for="phone">Phone Number:</label>
+                  <input type="tel" id="phone" name="phone" required placeholder="0712345678">
+                  <br>
+                  <label for="email">Email Address:</label>
+                  <input type="email" id="email" name="email" required placeholder="john@example.com">
+                </fieldset>
+            
+                <!-- Delivery Details -->
+                <fieldset>
+                  <legend>Delivery Details</legend>
+                  <label for="address">Address:</label>
+                  <textarea id="address" name="address" required placeholder="123 Street Name, City"></textarea>
+                  <br>
+                  <label for="postal-code">Postal Code:</label>
+                  <input type="text" id="postal-code" name="postal-code" required placeholder="12345">
+                  <br>
+                  <label for="city">City:</label>
+                  <select id="city" name="city" required>
+                    <option value="">Select City</option>
+                    <option value="Ampara">Ampara</option>
+                    <option value="Anuradhapura">Anuradhapura</option>
+                    <option value="Badulla">Badulla</option>
+                    <option value="Batticaloa">Batticaloa</option>
+                    <option value="Colombo">Colombo</option>
+                    <option value="Galle">Galle</option>
+                    <option value="Gampaha">Gampaha</option>
+                    <option value="Hambantota">Hambantota</option>
+                    <option value="Jaffna">Jaffna</option>
+                    <option value="Kalutara">Kalutara</option>
+                    <option value="Kandy">Kandy</option>
+                    <option value="Kegalle">Kegalle</option>
+                    <option value="Kilinochchi">Kilinochchi</option>
+                    <option value="Kurunegala">Kurunegala</option>
+                    <option value="Mannar">Mannar</option>
+                    <option value="Matale">Matale</option>
+                    <option value="Matara">Matara</option>
+                    <option value="Monaragala">Monaragala</option>
+                    <option value="Mullaitivu">Mullaitivu</option>
+                    <option value="Nuwara Eliya">Nuwara Eliya</option>
+                    <option value="Polonnaruwa">Polonnaruwa</option>
+                    <option value="Puttalam">Puttalam</option>
+                    <option value="Ratnapura">Ratnapura</option>
+                    <option value="Trincomalee">Trincomalee</option>
+                    <option value="Vavuniya">Vavuniya</option>
+                  </select>
+                </fieldset>
+            
+                <!-- Payment Information -->
+                <fieldset>
+                  <legend>Payment Information</legend>
+                  <label for="card-type">Card Type:</label>
+                  <select id="card-type" name="card-type" required>
+                    <option value="">Select Card Type</option>
+                    <option value="Visa">Visa</option>
+                    <option value="MasterCard">MasterCard</option>
+                    <option value="AmEx">American Express</option>
+                  </select>
+                  <br>
+                  <label for="card-number">Card Number:</label>
+                  <input type="text" id="card-number" name="card-number" required placeholder="1234 5678 9123 4567">
+                  <br>
+                  <div class="expiry">
+                    <label for="expire-month">Expire Month:</label>
+                    <input type="number" id="expire-month" name="expire-month" required min="3" max="12" placeholder="MM">
+                    <label for="expire-year">Expire Year:</label>
+                    <input type="number" id="expire-year" name="expire-year" required min="2025" placeholder="YYYY">
+                  </div>
+                  <label for="cvv">CVV:</label>
+                  <input type="text" id="cvv" name="cvv" required placeholder="123">
+                </fieldset>
+            
+                <!-- Pay Button -->
+                <button type="submit" class="pay-button">Pay Securely</button>
+              </form>
+            </section>
+    </main>
+    <footer>
+        <div class="footer">
+            <div class="footer-left">
+                <div class="logo-description">
+                    <img src="images/logo.jpg" alt="logo" class="logo">
+                    <div class="description">
+                        <p>Our unwavering commitment to compassionate patient care, innovation & outstanding patient 
+                            outcomes has earned us the position of trust we enjoy. With a focus on personalized care and 
+                            attention to detail, we strive to exceed the expectations of our patients.
+                        </p>
+                    </div>
+                </div>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <img src="images/address.png" alt="address" class="icon">
+                        <p>No. 241/B, Michelle Rd, Colombo</p>
+                    </div>
+                    <div class="contact-item">
+                        <img src="images/gmail.jpg" alt="gmail" class="icon">
+                        <p>Lifecare@gmail.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <img src="images/contact.jpg" alt="contact" class="icon">
+                        <p>011-2471889</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-right">
+                <h2>Quick Links</h2>
+                <div class="quick-links">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="About_us.html">About us</a></li>
+                        <li><a href="Services.html">Services</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="Doctors.html">Doctors</a></li>
+                        <li><a href="Consulting_reservation.html">Consulting reservation</a></li>
+                        <li><a href="Pharmacy.html">Pharmacy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
